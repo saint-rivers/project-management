@@ -1,0 +1,78 @@
+{
+  "users": [
+    {
+      "_id": 1,
+      "username": "dayan",
+      "password": "asd"
+    },
+    {
+      "_id": 2,
+      "username": "joy",
+      "password": "asd"
+    },
+    {
+      "_id": 3,
+      "username": "nasim",
+      "password": "asd"
+    }
+  ],
+  "projects": [
+    {
+      "_id": 1,
+      "title": "OOAD",
+      "members": [1, 2],
+      "tasks": [ 
+				{
+					"name": "get sth done",
+					"isComplete": false
+				},
+        {
+					"name": "ask team for a meeting",
+					"isComplete": false
+				},
+        {
+					"name": "sleep it off",
+					"isComplete": true
+				}
+			]
+    },
+    {
+      "_id": 2,
+      "title": "ASD",
+      "members": [2, 3],
+			"tasks": [ 
+				{
+					"name": "get sth else done",
+					"isComplete": false
+				},
+        {
+					"name": "look at the deadline",
+					"isComplete": true
+				},
+        {
+					"name": "sleep it off",
+					"isComplete": false
+				}
+			]
+    },
+    {
+      "_id": 3,
+      "title": "SE and IT management homework",
+      "members": [1, 2, 3],
+      "tasks": [ 
+				{
+					"name": "figure out what the actual homework is",
+					"isComplete": false
+				},
+        {
+					"name": "consider doing it or not",
+					"isComplete": false
+				},
+        {
+					"name": "find someone who you can copy from",
+					"isComplete": false
+				}
+			]
+    }
+  ]
+}

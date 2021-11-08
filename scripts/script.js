@@ -73,7 +73,7 @@ function backToProjectPage(){
 
 function loadProjects() {
   var obj;
-  fetch("./data.json")
+  fetch("../data/data.json")
     .then((response) => response.json())
     .then((json) => (obj = json))
     .then(() => insertProjectIntoDOM(obj));

@@ -15,17 +15,50 @@
     />
   </head>
   <body>
-    <form class="input-card" action="./pages/main.html">
-      <h1>Welcome</h1>
-      <label for="email">Email</label>
-      <input id="email" type="email" placeholder="enter your email" />
-      <label for="password">Password</label>
-      <input id="password" type="password" placeholder="enter your password" />
-      <hr class="w-75 m-auto mb-4">
-      <button type="submit">
-        Login
-      </button>
-      <a href="./pages/register.html">Create an account</a>
-    </form>
+    <div class="main-page">
+      <form class="input-card" action="./pages/main.html">
+        <h1>Welcome</h1>
+        <label for="login-email">Email</label>
+        <input id="login-email" type="email" placeholder="enter your email" />
+        <label for="login-password">Password</label>
+        <input
+          id="login-password"
+          type="password"
+          placeholder="enter your password"
+        />
+        <hr class="w-75 m-auto mb-4" />
+        <button type="submit" id="login-btn">Login</button>
+        <a href="./pages/register.html">Create an account</a>
+      </form>
+
+      <form class="input-card">
+        <h1>Register</h1>
+
+        <label for="firstname">First Name</label>
+        <input id="firstname" type="text" placeholder="enter your first name" />
+
+        <label for="lastname">Last Name</label>
+        <input id="lastname" type="text" placeholder="enter your last name" />
+
+        <label for="reg-email">Email</label>
+        <input id="reg-email" type="email" placeholder="enter your email" />
+
+        <label for="reg-password">Password</label>
+        <input id="reg-password" type="password" placeholder="choose a password" />
+
+        <label for="confirm-password">Confirm Password</label>
+        <input
+          id="confirm-password"
+          type="password"
+          placeholder="confirm password"
+        />
+        <hr class="w-75 m-auto mb-4" />
+
+        <button type="button" id="create-user">Create Account</button>
+        <a href="../index.html">Already have an account</a>
+      </form>
+    </div>
+
+    <script type="text/javascript" src="./scripts/register.js"></script>
   </body>
 </html>

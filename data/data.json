@@ -2,17 +2,17 @@
   "users": [
     {
       "_id": 1,
-      "username": "dayan",
+      "email": "hodor@gmail.com",
       "password": "asd"
     },
     {
       "_id": 2,
-      "username": "joy",
+      "email": "joy@gmail.com",
       "password": "asd"
     },
     {
       "_id": 3,
-      "username": "nasim",
+      "email": "nasim@gmail.com",
       "password": "asd"
     }
   ],

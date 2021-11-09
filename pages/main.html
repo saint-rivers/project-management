@@ -26,32 +26,101 @@
 
     <div class="base-card" id="project-card"></div>
 
-    <div class="base-card" id="task-container"></div>
+    <div class="base-card" >
+      <div id="task-navigation">
+        <input type="button" value="back" class="back-btn" id="back-btn" visible="false"/>
+        <input type="button" value="add task" class="back-btn" id="add-btn" visible="false"/>
+        <hr>
+      </div>
+      <div id="task-container"></div>
+    </div>
 
-
-    <div id="task-popup" class="modal" tabindex="-1" role="dialog">
+    <div class="modal" tabindex="-1" role="dialog" id="project-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 id="modal-title" class="modal-title">Modal title</h5>
-            <!-- <button type="button" class="close" width="50px" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button> -->
+            <h5 class="modal-title">Modal title</h5>
           </div>
-          <div id="modal-body" class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
-          <div id="assigned-to" class="modal-body">
-            <p>Modal body text goes here.</p>
-          </div>
+          <form action="#" class="modal-body">
+            <div class="modal-body">
+              <label for="p-name">Project Name: </label>
+              <input type="text" id="p-name" />
+            </div>
           <div class="modal-footer">
-            <button id="modal-edit" type="button" class="btn btn-primary">Update</button>
-            <button id="modal-close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="p-save" type="button" class="btn btn-primary">Save changes</button>
+            <button id="p-close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="task-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="t-name" class="modal-title">Modal title</h5>
+          </div>
+          <form action="#" class="modal-body">
+            <div class="modal-body">
+              <p id="t-desc">description</p>
+              <p id="t-assigned">to</p>
+              <p id="t-deadline">deadline</p>
+            </div>
+          <div class="modal-footer">
+            <!-- <button id="p-save" type="button" class="btn btn-primary">Save changes</button> -->
+            <button id="t-close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="task-input" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="modal-title" class="modal-title">New Task</h5>
+            
+          </div>
+          <form action="#" class="modal-body">
+            <div class="modal-body">
+              <label for="t-name-i">Task Name: </label>
+              <input type="text" id="t-name-i" />
+            </div>
+
+            <div class="modal-body">
+              <label for="description"> Desccription: </label>
+              <input type="text" id="description" />
+            </div>
+
+            <div class="modal-body">
+              <label for="deadline"> Assigned to: </label>
+              <input type="date" id="deadline" />
+            </div>
+
+            <div class="modal-body">
+              <label for="select-member"> Assigned to: </label>
+              <select name="members" id="select-member">
+              </select>
+            </div>
+          </form>
+          <div class="modal-footer">
+            <button id="create-task-btn" type="button" class="btn btn-primary">
+              Create Task
+            </button>
+            <button
+              id="t-close-i"
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <script type="text/javascript" src="../scripts/script.js"></script>
+    <script type="text/javascript" src="../scripts/toggles.js"></script>
   </body>
 </html>

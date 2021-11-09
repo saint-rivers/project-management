@@ -1,3 +1,0 @@
-function validate(email, password){
-    
-}

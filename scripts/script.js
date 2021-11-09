@@ -1,3 +1,6 @@
+let data;
+let selectedProject = -1;
+
 var pageTitle = $("project-title");
 
 var projectCard = document.getElementById("project-card");
@@ -5,62 +8,219 @@ var taskContainer = document.getElementById("task-container");
 
 var pop = $("#task-popup");
 
-function renderHomePage() {
-  taskContainer.style.display = "none";
-  pop.hide();
+function uuid() {
+  var dt = new Date().getTime();
+  var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function (c) {
+      var r = (dt + Math.random() * 16) % 16 | 0;
+      dt = Math.floor(dt / 16);
+      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+    }
+  );
+  return uuid;
 }
 
-function loadTasksOfProject(project){
+// =================================================================
+//
+// Task Management Functions
+//
+// =================================================================
 
-	var backBtn = document.createElement("input")
+function addTaskToProject() {
+  // insert into array
+  insertNewTask(
+    $("#t-name-i").val(),
+    false,
+    $("#select-member").val(),
+    $("#deadline").val(),
+    $("#description").val()
+  );
+}
 
-  // set back button
-	backBtn.setAttribute("type", "button");
-  backBtn.setAttribute("value", "back");
-  backBtn.classList.add("back-btn");
-  backBtn.addEventListener("click", backToProjectPage)
+function clearTaskContainer() {
+  while (taskContainer.firstChild) {
+    taskContainer.removeChild(taskContainer.lastChild);
+  }
+}
 
+function insertNewTask(name, isComplete, assignedTo, deadline, description) {
+  var task = {
+    name,
+    isComplete,
+    assignedTo,
+    deadline,
+    description,
+  };
 
-	taskContainer.appendChild(backBtn);
-  taskContainer.appendChild(document.createElement("hr"))
+  // var task = {
+  //   name: "troooooooooooooooooool",
+  //   isComplete: false,
+  //   assignedTo: 1,
+  //   deadline: "2021-11-11",
+  //   description: "there is no description",
+  // };
+  console.log(task);
+  console.log("before", data.projects[0].tasks);
+  data.projects[0].tasks.push(task);
+  console.log("after", data.projects[0].tasks);
+}
 
-	project.tasks.forEach((task, index) => {
-		var div = document.createElement("div");
+function onSaveNewTask() {
+  // insert
+  addTaskToProject();
+  // clear
+  clearTaskContainer();
+  // reload tasks
+  const project = data.projects[0];
+  // close modal
+  $("#task-input").hide();
+  console.log(data.projects[0].tasks);
+}
+
+function setupTaskInputModal() {
+  populateDropdownWithUsers();
+
+  $("#create-task-btn").on("click", onSaveNewTask);
+
+  $("#t-close-i").on("click", () => {
+    $("#task-input").hide();
+  });
+  $("#task-input").show();
+}
+
+function setupTaskDisplay(task) {
+  $("#t-name").html(task.name);
+  $("#t-desc").html(task.description);
+  $("#t-assigned").html("Assigned To: " + task.assignedTo);
+  $("#t-deadline").html("Deadline: " + task.deadline);
+
+  $("#t-close").on("click", () => {
+    $("#task-modal").hide();
+  });
+  $("#task-modal").show();
+}
+
+function renderTasks(tasks) {
+  $("#back-btn").on("click", () => {
+    toggleView("task");
+  });
+
+  unloadTasksFromDOM();
+
+  tasks.forEach((task, index) => {
+    var div = document.createElement("div");
     div.setAttribute("id", "task-" + index);
 
-		var checkbox = document.createElement("input")
-		checkbox.setAttribute("type", "checkbox");
+    var checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
 
     var h4 = document.createElement("h4");
-    // var hr = document.createElement("hr");
 
-		h4.textContent = task.name;
-    
-		checkbox.checked = task.isComplete;
-    
-		div.appendChild(checkbox);
-		div.appendChild(h4);
-		div.classList.add("task-card")
-    div.addEventListener("click", () => {
-      
-      var modalBody = task.description;
-      var assignedTo = "Assigned To: " + task.assignedTo;
-      
-      $("#modal-title").html(task.name)
-      $("#modal-body").find("p").html(modalBody);
-      $("#assigned-to").find("p").html(assignedTo);
-      $("#modal-close").on("click", ()=>$("#task-popup").hide())
+    h4.textContent = task.name;
 
-      pop.show();
-    })
+    checkbox.checked = task.isComplete;
 
-    // div.appendChild(hr);
+    div.appendChild(checkbox);
+    div.appendChild(h4);
+    div.classList.add("task-card");
+    div.addEventListener("click", () => setupTaskDisplay(task));
 
-		taskContainer.appendChild(div);
-	})
+    taskContainer.appendChild(div);
+  });
 }
 
-function insertProjectIntoDOM(obj) {
+function unloadTasksFromDOM() {
+  projectCard.style.display = "block";
+  taskContainer.style.display = "none";
+  pageTitle.innerHTML = "Projects";
+  while (taskContainer.firstChild) {
+    taskContainer.removeChild(taskContainer.lastChild);
+  }
+}
+
+// =================================================================
+//
+// Modal Functions
+//
+// =================================================================
+
+function loadProjectModal() {
+  $("#project-modal").show();
+  $("#p-save").on("click");
+  $("#p-close").on("click", () => $("#project-modal").hide());
+}
+
+function clearDropdown() {
+  var select = document.getElementById("select-member");
+  while (select.firstChild) {
+    select.removeChild(select.lastChild);
+  }
+}
+
+function populateDropdownWithUsers() {
+  members = ["jason", "belle", "delphine"];
+  var select = document.getElementById("select-member");
+
+  members.forEach((member) => {
+    var option = document.createElement("option");
+    option.setAttribute("value", member);
+    option.textContent = member;
+
+    select.appendChild(option);
+  });
+  // dropdown.appendChild();
+}
+
+function startPopupToInsertProject() {
+  $("#modal-title").html("New Project");
+  $("#modal-body").hide();
+  $("#assigned-to").hide();
+
+  clearDropdown();
+  populateDropdownWithUsers();
+
+  $("#modal-edit").html("Create");
+  $("#modal-close").html("Cancel");
+  $("#modal-close").on("click", () => $("#task-popup").hide());
+
+  pop.show();
+}
+
+// =================================================================
+//
+// Project Management Functions
+//
+// =================================================================
+
+function unloadProjectsFromDOM() {
+  while (projectCard.firstChild) {
+    projectCard.removeChild(projectCard.lastChild);
+  }
+}
+
+function insertNewProject(title, desc) {
+  var project = {
+    _id: uuid(),
+    title,
+    desc,
+    members: [1],
+  };
+  data.projects.push(project);
+}
+
+async function loadInitialProject() {
+  data = await getData();
+  renderProjectTODOM(data);
+}
+
+function renderProjectTODOM(obj) {
+  $("#back-btn").on("click", () => {
+    toggleView("project");
+  });
+
+  toggleView("project");
+  unloadProjectsFromDOM();
   obj.projects.forEach((project, index) => {
     var div = document.createElement("div");
     div.setAttribute("id", "project-" + index);
@@ -70,12 +230,11 @@ function insertProjectIntoDOM(obj) {
     h3.textContent = project.title;
 
     div.addEventListener("click", () => {
-      projectCard.style.display = "none";
-      taskContainer.style.display = "block";
+      toggleView("task");
       pageTitle.innerHTML = project.title;
 
-			// load tasks of project
-			loadTasksOfProject(project)
+      // load tasks of project
+      renderTasks(project.tasks);
     });
 
     div.appendChild(h3);
@@ -83,50 +242,64 @@ function insertProjectIntoDOM(obj) {
     projectCard.appendChild(div);
   });
 
-  loadNewProjectButton()
+  renderButtonToAddProject();
 }
 
-function loadNewProjectButton(){
+function renderButtonToAddProject() {
   var div = document.createElement("div");
   div.setAttribute("id", "add-project");
   div.classList.add("project-card");
-  div.classList.add("text-center")
-  div.classList.add("add-new-project")
+  div.classList.add("text-center");
+  div.classList.add("add-new-project");
   var h3 = document.createElement("h3");
-  h3.textContent = "+"
+  h3.textContent = "+";
 
-  div.addEventListener("click", (e)=>{
-    $("#modal-title").html("New Project")
-    $("#modal-body").find("p").html("asd");
-    $("#assigned-to").find("p").html("asd");
+  div.addEventListener("click", loadProjectModal);
 
-    $("#modal-edit").html("Create")
-    $("#modal-close").html("Cancel")
-    $("#modal-close").on("click", ()=>$("#task-popup").hide())
-
-    pop.show();
-  })
-
-  div.appendChild(h3)
-  projectCard.appendChild(div)
+  div.appendChild(h3);
+  projectCard.appendChild(div);
 }
 
-function backToProjectPage(){
-  projectCard.style.display = "block";
+// =================================================================
+//
+// Data Functions
+//
+// =================================================================
+
+async function getData() {
+  const obj = await fetch("../data/data.json");
+  return obj.json();
+}
+
+// =================================================================
+//
+// MAIN
+//
+// =================================================================
+
+function closeProjectModal() {
+  $("#p-name").val("");
+  $("#project-modal").hide();
+}
+
+function addProject() {
+  insertNewProject($("#p-name").val());
+  unloadProjectsFromDOM();
+  renderProjectTODOM(data);
+  closeProjectModal();
+}
+
+function renderHomePage() {
   taskContainer.style.display = "none";
-  pageTitle.innerHTML = "Projects";
-  while (taskContainer.firstChild) {
-    taskContainer.removeChild(taskContainer.lastChild);
-  }
-}
-
-function loadProjects() {
-  var obj;
-  fetch("../data/data.json")
-    .then((response) => response.json())
-    .then((json) => (obj = json))
-    .then(() => insertProjectIntoDOM(obj));
+  pop.hide();
 }
 
 renderHomePage();
-loadProjects();
+loadInitialProject();
+// $("#modal-edit").on("click", addProject);
+$("#p-save").on("click", addProject);
+
+$("#back-btn").on("click", () => {
+  toggleView("project");
+  renderProjectTODOM(data);
+});

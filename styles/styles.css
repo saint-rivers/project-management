@@ -1,19 +1,60 @@
 * {
 }
 
-.project-card {
+.base-card {
   display: block;
   width: 70%;
+  margin: 0 auto;
+  border-radius: 10px;
+
 }
 
-.main-page {
-  display: flex;
-  flex-direction: row;
-  align-content: flex-start;
+.project-card {
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin: 15px 0px;
+}
+
+.project-card:hover {
+  padding: 20px;
+  cursor: pointer;
+  background-color: #eee;
+  border-radius: 10px;
+}
+
+.back-btn {
+  margin: 0;
 }
 
 .task-card {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.task-card:hover {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #eee;
+  border-radius: 10px;
+}
+
+.task-card > h4 {
   display: inline;
+  margin: 0 15px;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+
+  margin: 0;
+  /* position: absolute; */
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(10%);
 }
 
 .input-card {
@@ -89,4 +130,20 @@ button:hover {
 
 .input-card > h1 {
   margin: 30px auto;
+}
+
+h1 {
+  /* margin: 30px auto; */
+  text-align: center;
+  margin-top: 30px;
+}
+
+input[type=checkbox] {
+  display:inline-block;
+  transform: scale(1.5);
+  border-radius: 25px;
+}
+
+.add-new-project {
+  background-color: #ddd
 }

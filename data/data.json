@@ -24,15 +24,24 @@
       "tasks": [ 
 				{
 					"name": "get sth done",
-					"isComplete": false
+					"isComplete": true,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				},
         {
 					"name": "ask team for a meeting",
-					"isComplete": false
+					"isComplete": false,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				},
         {
 					"name": "sleep it off",
-					"isComplete": true
+					"isComplete": true,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				}
 			]
     },
@@ -43,15 +52,24 @@
 			"tasks": [ 
 				{
 					"name": "get sth else done",
-					"isComplete": false
+					"isComplete": false,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				},
         {
 					"name": "look at the deadline",
-					"isComplete": true
+					"isComplete": true,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				},
         {
 					"name": "sleep it off",
-					"isComplete": false
+					"isComplete": false,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				}
 			]
     },
@@ -62,15 +80,24 @@
       "tasks": [ 
 				{
 					"name": "figure out what the actual homework is",
-					"isComplete": false
+					"isComplete": false,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				},
         {
 					"name": "consider doing it or not",
-					"isComplete": false
+					"isComplete": false,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				},
         {
 					"name": "ask god for help",
-					"isComplete": false
+					"isComplete": false,
+          "assignedTo": 1,
+          "deadline": "2021-11-11",
+          "description": "there is no description"
 				}
 			]
     }

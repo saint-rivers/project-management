@@ -61,5 +61,8 @@ $("#create-user").on("click", (event) => insertNewUser(event));
 $("#login-btn").on("click", (event) => {
   var email = $("#login-email").val();
   var password = $("#login-password").val();
+
+  var email = "joy@gmail.com";
+  var password = "asd"
   login(event, email, password);
 });

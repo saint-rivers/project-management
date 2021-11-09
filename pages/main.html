@@ -11,17 +11,46 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="../styles/styles.css" />
   </head>
   <body>
-    <h1>Project Management</h1>
+    <h1 id="main-header">Project Management</h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <div id="root"></div>
-    <h2 id="project-title">Projects</h2>
-    <hr />
+    <!-- <div id="root"></div> -->
 
-    <div class="project-card" id="project-card"></div>
+    <div class="base-card">
+      <h2 id="project-title">Projects</h2>
+      <hr />
+    </div>
 
-    <div class="project-card" id="task-container"></div>
+    <div class="base-card" id="project-card"></div>
+
+    <div class="base-card" id="task-container"></div>
+
+
+    <div id="task-popup" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="modal-title" class="modal-title">Modal title</h5>
+            <!-- <button type="button" class="close" width="50px" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button> -->
+          </div>
+          <div id="modal-body" class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+          <div id="assigned-to" class="modal-body">
+            <p>Modal body text goes here.</p>
+          </div>
+          <div class="modal-footer">
+            <button id="modal-edit" type="button" class="btn btn-primary">Update</button>
+            <button id="modal-close" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script type="text/javascript" src="../scripts/script.js"></script>
   </body>
